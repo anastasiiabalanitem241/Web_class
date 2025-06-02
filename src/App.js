@@ -11,11 +11,13 @@ function App() {
         { id: 3, name: 'Security Camera', status: true },
         { id: 4, name: 'Garage Door', status: false },
     ]);
+
     const toggleDeviceStatus = (id) => {
         setDevices(devices.map(device =>
             device.id === id ? { ...device, status: !device.status } : device
         ));
     };
+
     return (
         <>
             <AppNavbar />
