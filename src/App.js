@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import AppNavbar from './components/Navbar';
 import DeviceList from './components/DeviceList';
 import DeviceInfo from './components/DeviceInfo';
+import About from './components/About';
+
 import { Container, Row, Col  } from 'react-bootstrap';
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
     ]);
 
     const [selectedDevice, setSelectedDevice] = useState(null);
+    const [page, setPage] = useState('dashboard');
 
     const toggleDeviceStatus = (id) => {
         setDevices(devices.map(device =>
@@ -27,16 +30,20 @@ function App() {
 
     return (
         <>
-            <AppNavbar />
+            <AppNavbar onSelectPage={setPage}/>
             <Container className="mt-4">
-                <Row>
-                    <Col md={8}>
-                        <DeviceList devices={devices} onToggle={toggleDeviceStatus} onSelect={handleDeviceClick} />
-                    </Col>
-                    <Col md={4}>
-                        {selectedDevice && <DeviceInfo device={selectedDevice} />}
-                    </Col>
-                </Row>
+                {page == 'dashboard' ? (
+                    <Row>
+                        <Col md={8}>
+                            <DeviceList devices={devices} onToggle={toggleDeviceStatus} onSelect={handleDeviceClick} />
+                        </Col>
+                        <Col md={4}>
+                            {selectedDevice && <DeviceInfo device={selectedDevice} />}
+                        </Col>
+                    </Row>
+                ) : (
+                    <About/>
+                )}
             </Container>
         </>
     );
