@@ -10,6 +10,7 @@ function AppNavbar({onSelectPage}) {
                 </Navbar.Brand>
                 <Nav className="ml-auto">
                     <Nav.Link onClick={() => onSelectPage('dashboard')}>Dashboard</Nav.Link>
+                    <Nav.Link onClick={() => onSelectPage('settings')}>Settings</Nav.Link>
                     <Nav.Link onClick={() => onSelectPage('about')}>About</Nav.Link>
                 </Nav>
             </Container>
