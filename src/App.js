@@ -1,29 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import AppNavbar from './components/Navbar';
-import DeviceCard from './components/DeviceCard';
-import { Container, Row, Col } from 'react-bootstrap';
-
-const devices = [
-    { name: 'Living Room Light', status: true },
-    { name: 'Thermostat', status: false },
-    { name: 'Security Camera', status: true },
-    { name: 'Garage Door', status: false },
-];
+import DeviceList from './components/DeviceList';
+import { Container } from 'react-bootstrap';
 
 function App() {
+    const [devices, setDevices] = useState([
+        { id: 1, name: 'Living Room Light', status: true },
+        { id: 2, name: 'Thermostat', status: false },
+        { id: 3, name: 'Security Camera', status: true },
+        { id: 4, name: 'Garage Door', status: false },
+    ]);
+    const toggleDeviceStatus = (id) => {
+        setDevices(devices.map(device =>
+            device.id === id ? { ...device, status: !device.status } : device
+        ));
+    };
     return (
         <>
             <AppNavbar />
             <Container className="mt-4">
-                <Row>
-                    {devices.map((device, index) => (
-                        <Col md={6} lg={4} className="mb-4" key={index}>
-                            <DeviceCard device={device} />
-                        </Col>
-                    ))}
-                </Row>
+                <DeviceList devices={devices} onToggle={toggleDeviceStatus} />
             </Container>
         </>
     );
